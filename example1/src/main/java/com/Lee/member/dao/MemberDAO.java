@@ -32,9 +32,25 @@ public class MemberDAO {
 		return sqlSession.selectOne("Member.login", memberVO);
 	}
 
-	public List<MemberVO> userList(List<MemberVO> memberVO) {
+	/*public List<MemberVO> userList(List<MemberVO> memberVO) {
 		System.out.println("3");
 		return sqlSession.selectList("Member.userList", memberVO);
+	}*/
+
+	public List<MemberVO> memberList() {
+
+		return sqlSession.selectList("Member.memberList");
 	}
+
+	public MemberVO memberView(String id) {
+		
+		return sqlSession.selectOne("Member.memberView", id);
+	}
+
+	public int memberDel(String id) {
+		
+		return sqlSession.delete("Member.memberDel", id);
+	}
+
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 //import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 //import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 //import javax.xml.ws.Response;
 
 //import org.slf4j.Logger;
@@ -44,6 +45,9 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
+	
+	@Autowired
+	private HttpSession session;
 	
 	//프로젝트 시작했을 때 페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -87,19 +91,38 @@ public class MemberController {
 			
 		//로그아웃
 		@RequestMapping(value = "/logout" , method = RequestMethod.GET)
-		public ModelAndView logout() {
-			mav = new ModelAndView();
-			mav = ms.logout();
-			return mav;
+		public String logout() {
+			session.removeAttribute("session_id");
+			return "loginForm";
 		}
 		
 		//회원목록
 		@RequestMapping(value = "/userList" , method = RequestMethod.GET)
-		public ModelAndView userListView(@ModelAttribute List<MemberVO> memberVO,HttpServletResponse response) throws IOException{
+		public ModelAndView userListView(HttpSession session) throws IOException{
 			mav = new ModelAndView();
-			System.out.println("1");
-			mav = ms.userListView(memberVO,response);
+			String loginMember = (String)session.getAttribute("session_id");
+			if(loginMember == null || !loginMember.equals("admin")) {
+				mav.setViewName("loginForm");
+			}else {
+				mav = ms.memberList();
+			}
 			
 			return mav;
+		}
+		
+		//회원정보 보기
+		@RequestMapping(value = "/userView", method = RequestMethod.GET)
+		public ModelAndView memberView(@RequestParam("id") String id) {
+			mav = new ModelAndView();
+			mav = ms.memberView(id);
+			return mav;
+		}
+		
+		//회원 삭제 하기 memberDel
+		@RequestMapping(value = "/memberDel", method = RequestMethod.GET)
+		public String memberDel(@RequestParam("id") String id) {
+			/*mav = new ModelAndView();*/
+			ms.memberDel(id);
+			return "redirect:/userList";
 		}
 }

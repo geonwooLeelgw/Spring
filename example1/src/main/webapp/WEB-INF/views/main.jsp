@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,5 +15,8 @@
 %> <a href="userList">회원목록</a> <%}%>
 
 <a href="logout">로그아웃</a>
+
+
+<%-- <c:if test="${loginMember.id eq 'admin' }"></c:if> --%>
 </body>
 </html>

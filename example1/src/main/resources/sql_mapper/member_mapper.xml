@@ -19,9 +19,20 @@ SELECT * FROM MEMBER WHERE id=#{id}
 SELECT * FROM MEMBER WHERE id=#{id}
 </select>
 
-<!-- 회원목로 보기 -->
-<select id="userList" parameterType="member" resultType="member">
+<!-- 회원목록 보기 -->
+<select id="memberList" parameterType="member" resultType="member">
 SELECT * FROM MEMBER
 </select>
+
+<!-- 회원정보 보기 -->
+<select id="memberView" parameterType="member" resultType="member">
+SELECT * FROM MEMBER where id=#{id}
+</select>
+
+<!-- 회원정보 보기 -->
+<select id="memberDel" parameterType="member" resultType="member">
+delete member where id=#{id}
+</select>
+
 
 </mapper>

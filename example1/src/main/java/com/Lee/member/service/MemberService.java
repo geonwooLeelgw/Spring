@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -31,10 +30,6 @@ public class MemberService {
 	
 	@Autowired
 	private HttpSession session;
-	
-	@Autowired
-	private HttpServletRequest request;
-	
 	
 	//회원가입 메소드
 	public ModelAndView memberJoin(MemberVO memberVO) {
@@ -95,14 +90,14 @@ public class MemberService {
 		return mav;
 }
 	//로그아웃
-	public ModelAndView logout() {
+	/*public ModelAndView logout() {
 		session.removeAttribute("session_id");
 		mav.setViewName("loginForm");
-		return mav;
-	}
+		return mav;*/
+	//}
 	
-	//사용자 목록보기
-	public ModelAndView userListView(List<MemberVO> memberVO, HttpServletResponse response) throws IOException {
+	//내가 코딩한 것 사용자 목록보기
+	/*public ModelAndView userListView(List<MemberVO> memberVO, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();
@@ -123,5 +118,32 @@ public class MemberService {
 			mav.setViewName("main");
 		}
 		return mav;
+	}*/
+	
+	//사용자 목록보기
+	public ModelAndView memberList() {
+		mav = new ModelAndView();
+		
+		List<MemberVO> memberList = memberDAO.memberList();
+		
+		mav.addObject("memberList",memberList); //data를 담을때 사용하는 메소드
+		mav.setViewName("userList"); 
+		return mav;
+	}
+	//회원 정보보기
+	public ModelAndView memberView(String id) {
+		mav = new ModelAndView();
+		MemberVO viewMember = memberDAO.memberView(id);
+		mav.addObject("viewMember",viewMember);
+		mav.setViewName("memberView");
+		
+		return mav;
+	}
+	//회원 삭제
+	public void memberDel(String id) {
+		
+		memberDAO.memberDel(id);
+		
+		
 	}
 }
