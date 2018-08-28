@@ -19,6 +19,7 @@ SELECT * FROM MEMBER WHERE id=#{id}
 SELECT * FROM MEMBER WHERE id=#{id}
 </select>
 
+
 <!-- 회원목록 보기 -->
 <select id="memberList" parameterType="member" resultType="member">
 SELECT * FROM MEMBER
