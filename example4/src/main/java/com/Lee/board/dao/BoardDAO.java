@@ -2,7 +2,6 @@ package com.Lee.board.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,5 +24,23 @@ public class BoardDAO {
 		
 		return sqlSession.insert("Board.boardWrite", boardVO);
 	}
+
+	public BoardVO boardView(int bId) {
+		return sqlSession.selectOne("Board.boardView", bId);
+		
+		
+	}
+
+	public int bHitUp(int bId) {
+		return sqlSession.update("Board.bHitUp", bId);
+	}
+
+	public int boardDel(int bId) {
+		return sqlSession.delete("Board.boardDel", bId);
+		
+	}
+
+
+	
 
 }

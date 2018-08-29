@@ -1,0 +1,13 @@
+1. pom.xml - properties 부터 복붙 <Crtl + s>
+   * Dependencies 의존성 추가 (Lib)
+	* 그냥 넣어도 상관 없음 pom.xml파일에
+2. web.xml => properties - project Facets
+Dynamic web Module 3.1 / java 1.8
+
+3. servlet-context.xml
+
+4. root-context.xml - 기존에 썼던거
+
+5. mybatis-config.xml (고치기, 경로)
+
+6. sql-mapper< **.mapper.xml

@@ -1,5 +1,6 @@
 package com.Lee.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 //import java.io.IOException;
@@ -12,20 +13,22 @@ import java.io.IOException;
 //import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 //import javax.servlet.http.HttpServlet;
 //import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 //import javax.xml.ws.Response;
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.ui.Model;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 //import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,44 +46,65 @@ public class BoardController {
 	 * @Autowired를 붙이면 스프링 컨테이너가 자동으로 관리 함.
 	 */
 	@Autowired
-	private BoardService ms;
+	private BoardService bs;
 	private ModelAndView mav;
 	
-	@Autowired
-	private BCryptPasswordEncoder passEncoder;
-	
-	@Autowired
-	private HttpSession session;
-	
-
+	//첫페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home() {
+		
+		return "redirect:/boardList";
+	}
+	//목록으로!
+	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public ModelAndView boardList() throws IOException {
 		mav = new ModelAndView();
-		mav = ms.boardList();
-		
-		return mav;
-	}
-	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
-	public ModelAndView boardList2() throws IOException {
-		mav = new ModelAndView();
-		mav = ms.boardList();
+		mav = bs.boardList();
 		
 		return mav;
 	}
 	
-	//글쓰기로 넘어오기
+	//글쓰기 jsp로 가즈아~!
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite() {
 		
 		return "boardWrite";
 	}
-	//글쓰기
+	//글 쓰기
 	@RequestMapping(value = "/boardWritePro", method=RequestMethod.POST)
-	public ModelAndView memberJoin(@ModelAttribute BoardVO boardVO) {
+	public ModelAndView boardWritePro(@ModelAttribute BoardVO boardVO) throws IOException {
 		mav = new ModelAndView();
 		
-		mav = ms.boardWrite(boardVO);
+		MultipartFile bfile = boardVO.getbFile();
+		if(!bfile.isEmpty()) {
+			String fileName = bfile.getOriginalFilename(); // 파일 이름 가져오기
+			bfile.transferTo(new File("C:\\Users\\user\\git\\Spring\\example4\\src\\main\\webapp\\WEB-INF\\upload\\"+fileName)); // 파일을 관리할 경로
+		}
+		
+		boardVO.setbFileName(bfile.getOriginalFilename());
+		
+		mav = bs.boardWrite(boardVO);
 		return mav;
 	}	
-
+	//상세 보기
+	@RequestMapping(value = "/boardView", method = RequestMethod.GET)
+	public ModelAndView boardView(@RequestParam("bId") int bId) {
+		mav = new ModelAndView();
+		mav = bs.boardView(bId);
+		return mav;
+	}
+	//게시물 삭제
+	@RequestMapping(value = "/baordDelete", method = RequestMethod.GET)
+	public ModelAndView boardDel(@RequestParam("bId") int bId) {
+		mav = new ModelAndView();
+		mav = bs.boardDel(bId);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/boardUpdate", method = RequestMethod.GET)
+	public ModelAndView boardUpdate(@RequestParam("bId") int bId) {
+		mav = new ModelAndView();
+		mav = bs.boardUpdate(bId);
+		return mav;
+	}
 }

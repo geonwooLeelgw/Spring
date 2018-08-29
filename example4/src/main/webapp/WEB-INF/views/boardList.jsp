@@ -38,16 +38,16 @@
 	<c:forEach var = "board" items="${boardList}">
 	<tr>
 	<td> 
-	${board.board_num}
+	${board.bId}
 	</td>
 	<td id="sub">
-	<a href="boardViewAction?board_num=${board.board_num}">${board.board_subject}</a>
+	<a href="boardView?bId=${board.bId}">${board.bTitle}</a>
 	</td>
 	<td>
-	${board.date}
+	${board.bDate}
 	</td>
 	<td>
-	${board.board_readcount}
+	${board.bHit}
 	</td>
 	</tr>
 	</c:forEach>

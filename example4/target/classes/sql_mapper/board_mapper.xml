@@ -6,14 +6,31 @@
 
 <!-- 목록 보기 -->
 <select id="boardList" parameterType="board" resultType="board">
-SELECT * FROM BOARD
+SELECT * FROM BOARD ORDER BY BID
 </select>
 
-
-<insert id="boardWrite" parameterType="board">
-insert into board values(#{board_num},#{board_name},#{board_pass},#{board_subject},
-#{board_content},#{board_file},#{board_re_ref},#{board_re_lev},#{board_re_seq},#{board_readcount},
-#{date})
+<!-- 글 쓰기 -->
+<insert id="boardWrite" parameterType="board" useGeneratedKeys="true" keyProperty="bId">
+INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{bName}, #{bTitle}, #{bContent}, SYSDATE, 0, #{bFileName})
+<selectKey keyProperty="bId" resultType="int" order="AFTER">
+SELECT BOARD_SEQ.CURRVAL FROM DUAL
+</selectKey>
 </insert>
+
+<!-- 조회수 올리기  bHitUp-->
+<update id="bHitUp" parameterType="board">
+UPDATE BOARD SET BHIT=BHIT+1 WHERE BID=#{bId}
+</update>
+ 
+ 
+<!-- 글상세보기 -->
+<select id="boardView" parameterType="board" resultType="board">
+SELECT * FROM BOARD WHERE BID = #{bId}
+</select>
+
+<delete id="boardDel" parameterType="board">
+DELETE FROM BOARD WHERE BID= #{bId}
+</delete>
+
 
 </mapper>

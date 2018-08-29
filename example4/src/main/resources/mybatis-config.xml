@@ -9,3 +9,4 @@
 <typeAlias alias="board" type="com.Lee.board.vo.BoardVO"/>
 </typeAliases>
 </configuration>
+
