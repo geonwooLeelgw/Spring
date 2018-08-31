@@ -4,6 +4,11 @@
 
 <mapper namespace="Board">
 
+<!-- 
+크거나 같다와 같은 부등호 기호를 이용할 때는 CDATA로 쿼리문을 감싸줘야함
+![CDATA[쿼리문]]> 부등호 쓰려면
+ -->
+
 <!-- 목록 보기 -->
 <select id="boardList" parameterType="board" resultType="board">
 SELECT * FROM BOARD ORDER BY BID
@@ -28,9 +33,20 @@ UPDATE BOARD SET BHIT=BHIT+1 WHERE BID=#{bId}
 SELECT * FROM BOARD WHERE BID = #{bId}
 </select>
 
+<!-- 게시물삭제 -->
 <delete id="boardDel" parameterType="board">
 DELETE FROM BOARD WHERE BID= #{bId}
 </delete>
+
+<!-- 게시물수정페이지 보기 -->
+<select id="boardUpdateView" parameterType="board" resultType="board">
+SELECT * FROM BOARD WHERE BID = #{bId}
+</select>
+
+<!-- 게시물 수정 -->
+<update id="boardUpdate" parameterType="board">
+UPDATE BOARD SET BNAME=#{bName},BTITLE=#{bTitle},BCONTENT=#{bContent} WHERE BID=#{bId}
+</update>
 
 
 </mapper>

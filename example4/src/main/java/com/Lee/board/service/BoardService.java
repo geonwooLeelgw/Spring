@@ -54,7 +54,10 @@ public class BoardService {
 		}else {
 			//조회수 올리기 성공시
 			BoardVO boardView = boardDAO.boardView(bId);
-		
+			System.out.println("======================================================");
+			System.out.println(boardView.getbFileName());
+			System.out.println(boardView.getbFile());
+			System.out.println(boardView.getbName());
 			mav.addObject("boardView", boardView);
 			mav.setViewName("boardView");
 		}
@@ -76,10 +79,27 @@ public class BoardService {
 		
 		return mav;
 	}
-	//게시물 수정하기전 값 불러오기
-	public ModelAndView boardUpdate(int bId) {
-		//여기까지함.
-		return null;
+	//게시물 수정
+	public ModelAndView boardUpdate(BoardVO boardVO) {
+		mav = new ModelAndView();
+		int result = boardDAO.boardUpdate(boardVO);
+		if(result==0) {
+			mav.setViewName("redirect:boardView?bId="+boardVO.getbId());
+		}else {
+			mav.setViewName("redirect:boardView?bId="+boardVO.getbId());
+		}
+		
+		return mav;
+	}
+	//게시물 수정 값 불러오기
+	public ModelAndView boardUpdateView(int bId) {
+		
+		mav = new ModelAndView();
+		BoardVO boardUpdateView = boardDAO.boardUpdateView(bId);
+		mav.addObject("boardUpdateView", boardUpdateView);
+		mav.setViewName("boardUpdate");
+		
+		return mav;
 	}
 
 	

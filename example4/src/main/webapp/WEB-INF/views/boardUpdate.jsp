@@ -38,13 +38,13 @@
 <h2>게시판 글수정</h2>
 <table>
 
-<form name="board_update" action="./boardUpdateWritePro?bId=${boardUpdate.bId}" method="post">
+<form name="board_update" action="boardUpdateWritePro?bId=${boardUpdateView.bId}" method="post">
 
- <tr><td id="t1">글쓴이</td><td id="t2"><input type="text" name="bName" required="required" value="${boardUpdate.bName}"></td></tr>
- <tr><td id="t1">제 목</td><td id="t2"><input type="text" name="bTitle" required="required" value="${boardUpdate.bTitle}"></td></tr>
- <tr><td id="t1">내 용</td><td id="t2"><textarea name="bContent" rows="20" cols="50" required="required" placeholder="${boardUpdate.bContent}"></textarea></td></tr>
- <tr><td id="t1">파 일</td><td id="t2"><input type="text" name="bFile" required="required" value="${boardUpdate.bFile}"></td></tr>
- <tr><td></td><td id="t3"><a href="javascript:board_update.submit()">[수정]</a>　<a href="boardView?board_num=${boardUpdate.bId}">[뒤로]</a></td></tr>
+ <tr><td id="t1">글쓴이</td><td id="t2"><input type="text" name="bName" required="required" value="${boardUpdateView.bName}"></td></tr>
+ <tr><td id="t1">제 목</td><td id="t2"><input type="text" name="bTitle" required="required" value="${boardUpdateView.bTitle}"></td></tr>
+ <tr><td id="t1">내 용</td><td id="t2"><textarea name="bContent" rows="20" cols="50" required="required" placeholder="${boardUpdateView.bContent}"></textarea></td></tr>
+ <%-- <tr><td id="t1">파 일</td><td id="t2"><input type="text" name="bFile" required="required" value="${boardUpdateView.bFile}"></td></tr> --%> 
+ <tr><td></td><td id="t3"><a href="javascript:board_update.submit()">[수정]</a>　<a href="boardView?bId=${boardUpdateView.bId}">[뒤로]</a></td></tr>
 
 </form>
 
