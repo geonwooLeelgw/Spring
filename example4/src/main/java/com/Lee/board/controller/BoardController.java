@@ -1,7 +1,11 @@
 package com.Lee.board.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletResponse;
 
 //import java.io.IOException;
 //import java.text.DateFormat;
@@ -117,10 +121,25 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value = "/boardFileDown", method = RequestMethod.GET)
-	public ModelAndView fileDown(@RequestParam("bFileName") String bFileName) {
+	public void fileDown(@RequestParam("bFileName") String bFileName, HttpServletResponse response) throws Exception {
 		
+		//무조건 팝업창 뜨게 하는!
+		response.setContentType("application/octet-stream");	
+		String Orgname = new String(bFileName.getBytes("UTF-8"), "iso-8859-1");
 		
+		//파일명 지정(스펠링 중요)
+		response.setHeader("Content-Disposition", "attachment;filename=\""+Orgname+"\"");
 		
+		OutputStream os = response.getOutputStream();
+		String path = "C:\\Users\\user\\git\\Spring\\example4\\src\\main\\webapp\\WEB-INF\\upload\\";
+		FileInputStream fis = new FileInputStream(path+File.separator+bFileName);
+		int n = 0;
+		byte[] b = new byte[512];
+		while((n = fis.read(b))!=-1) {
+			os.write(b, 0, n);
+		}
+		fis.close();
+		os.close();
 	/*	String fileName = request.getParameter("downFile");
 		
 		String savePath = "boardUpload";
@@ -166,6 +185,6 @@ public class BoardController {
 		out2.close();
 		in.close();*/
 		
-		return null;
+		
 	}
 }

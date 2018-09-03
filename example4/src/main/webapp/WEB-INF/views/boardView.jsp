@@ -41,7 +41,7 @@
 	</td>
 	</tr>
 	<tr>
-	<td>파일</td><td><a href="boardFileDown?downFile=${boardView.bFileName}">${boardView.bFileName}</a></td>
+	<td>파일</td><td><a href="boardFileDown?bFileName=${boardView.bFileName}">${boardView.bFileName}</a></td>
 	</tr>
 	<tr>
 	<td>
