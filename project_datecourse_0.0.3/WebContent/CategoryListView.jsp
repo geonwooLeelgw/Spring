@@ -202,7 +202,7 @@
 
 			</p>
 			<!-- se2/Insert/null -->
-			<%-- <c:choose>
+			 <c:choose>
 	<c:when test="${likeBean.id == sessionScope.id}">
 	　<button type="button" class="btn btn-danger"
 					onclick="location.href='courseLikeNo.s?course_num=${courseView.course_num }'">좋아요
@@ -213,7 +213,7 @@
 		　<button type="button" class="btn btn-primary"
 					onclick="location.href='courseLike.s?course_num=${courseView.course_num }'">좋아요</button>
 	</c:otherwise>
-</c:choose>  --%>
+</c:choose>  
 
 
 

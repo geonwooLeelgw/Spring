@@ -34,9 +34,6 @@ function idOverlap() {
 	}
 </script>
 
-
-
-
 </head>
 <body>
 <form name="joinForm" action="join" method="post" id="frm">
