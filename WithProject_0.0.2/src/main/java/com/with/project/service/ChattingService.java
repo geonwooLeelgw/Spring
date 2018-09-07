@@ -1,5 +1,8 @@
 package com.with.project.service;
 
-public class ChattingService {
 
+import org.springframework.stereotype.Service;
+
+@Service
+public class ChattingService {
 }

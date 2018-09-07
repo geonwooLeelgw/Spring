@@ -32,8 +32,10 @@
 <a href="UserStart">유저용 시작하기</a><br><br>
 <a href="UserMyPage">마이페이지 유저용</a><br><br>
 </c:if>
-
-
+<h3>주형, 다훈 기능</h3>
+<a href="WithPay">결제하기</a><br><br>
+<a href="RoomList1">동승목록보기</a><br><br>
+<a href="RoomList2">예약목록보기</a><br><br>
 
 <%-- 로그인 아이디 확인 :<%=id %><br><br>
 <%=request.getAttribute("LoginMember") %><br><br>

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.with.project.service.MemberService;
+import com.with.project.vo.CreateRoomVO;
 import com.with.project.vo.MemberVO;
 
 
@@ -157,5 +158,4 @@ public class HomeController {
 		mav = ms.DriverInfoAlter(memberVO);
 		return mav;
 	}
-	
 }
