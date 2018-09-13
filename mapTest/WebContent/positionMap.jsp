@@ -8,7 +8,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>Google Map</title>
 
-    <script src="http://maps.google.com/maps?file=api&v=2&hl=&key=" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&v=2&hl=&key=AIzaSyCW2M9BGzxaIwHnXTpZNcNFlpvHrjyBWZg" type="text/javascript"></script>
 	<!--AIzaSyCW2M9BGzxaIwHnXTpZNcNFlpvHrjyBWZg  -->
     <script type="text/javascript">
         function fnAdjust() {
@@ -192,38 +192,7 @@
         </form>
     </div>
     
-    <div style="padding:5px 45px 10px 85px;">
-        <form name="googleMap2" action="#" onsubmit="showAddress2(this.address.value); return false">
-        
-            <table width="650">
-            
-                <tr>
-                    <td colspan="5">
-                        <input type="text" size="70" name="address" value="" />
-                        <input type="submit" class="btn" value="Address Search" />
-                    </td>
-                    </tr>
-            
-                <tr height="10">
-                    <td colspan="5"></td>
-                    </tr>
-            
-                <tr>
-                    <td width="117"><b>Latitude</b></td>
-                    <td width="117">
-                        <input id="lat" type="text" size="12" name="latitude" value="" />
-                    </td>
-                    <td width="117"><b>Longitude</b></td>
-                    <td width="117">
-                        <input id="lng" type="text" size="12" name="longitude" value="" />
-                    </td>
-                    <td width="182">
-                        <input type="button" class="btn" value="Adjust" onclick="fnAdjust2()" />
-                    </td>
-                    </tr>
-            </table>
-        </form>
-    </div>
+  
     </body>
 
 </html>

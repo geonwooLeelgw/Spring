@@ -158,4 +158,30 @@ public class HomeController {
 		mav = ms.DriverInfoAlter(memberVO);
 		return mav;
 	}
+	//지도가기
+		@RequestMapping(value = "/maps", method = RequestMethod.GET)
+		public String maps() {
+			return "Maps";
+
+		}
+		//SearchMap
+		@RequestMapping(value = "/SearchMap", method = RequestMethod.GET)
+		public String SearchMap() {
+			return "SearchMap";
+
+		}
+		//Search2Map
+		@RequestMapping(value = "/Search2Map", method = RequestMethod.GET)
+		public String Search2Map() {
+			return "Search2Map";
+
+		}
+		
+		//맵다시띄우기ReStart
+		@RequestMapping(value = "/ReStart", method = RequestMethod.GET)
+		public String ReStart() {
+			return "Maps";
+
+		}
+		
 }

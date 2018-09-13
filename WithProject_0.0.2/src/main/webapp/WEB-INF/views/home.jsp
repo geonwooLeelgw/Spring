@@ -32,11 +32,15 @@
 <a href="UserStart">유저용 시작하기</a><br><br>
 <a href="UserMyPage">마이페이지 유저용</a><br><br>
 </c:if>
+<h2>지도</h2>
+<a href="maps">길찾기</a><br><br>
+<a href="SearchMap">클릭했을때 경도위도 주소</a><br><br>
+<a href="Search2Map">검색하면 위치에 마커</a><br><br>
 <h3>주형, 다훈 기능</h3>
 <a href="WithPay">결제하기</a><br><br>
 <a href="RoomList1">동승목록보기</a><br><br>
 <a href="RoomList2">예약목록보기</a><br><br>
-
+<a href="test">테스트</a>
 <%-- 로그인 아이디 확인 :<%=id %><br><br>
 <%=request.getAttribute("LoginMember") %><br><br>
 아이디: ${LoginMember.id}<br><br>
