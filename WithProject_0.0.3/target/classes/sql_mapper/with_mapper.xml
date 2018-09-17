@@ -43,18 +43,29 @@ UPDATE member SET email=#{Email},TEL=#{Tel},address=#{Address},certificate=#{Cer
 SELECT * FROM MEMBER WHERE id=#{id}
 </select>
 <!-- max(RoomId) 찾기 -->
-<select id="RoomId" resultType="int">
+<select id="RoomId" resultType="String">
 select max(ROOMID) AS ROOMID from ROOM
 </select>
 
 <!-- CreateRoom 방만들기 처음에 insert -->
 <insert id="CreateRoom" parameterType="room">
-insert into ROOM(Roomid,RStart,REnd,PreTime,PreDistance,PreMoney,Rid1) values(#{roomId},#{rStart},#{rEnd},#{preTime},#{preDistance},#{preMoney},#{rId1})
+insert into ROOM(roomId,RStart,REnd,PreTime,PreDistance,PreMoney,Rid1) values(#{roomId},#{rStart},#{rEnd},#{preTime},#{preDistance},#{preMoney},#{rId1})
 </insert>
 
 <!-- RoomList
 <select id="RoomList" parameterType="int" resultType="room">
 SELECT * FROM ROOM WHERE Roomid=#{insertRoomId}
 </select> -->
-
+<!-- CreateRoom 방 옵션, 최대인원 추가 -->
+<update id="CreateRealRoom" parameterType="with">
+update room set OPGENDER=#{opGender},MAXIMUM=#{maximum} where ROOMID = #{roomId}
+</update>
+<!-- SelectRoom -->
+<select id="SelectRoom" parameterType="room" resultType="room">
+select * from room where roomId=#{roomId}
+</select>
+<!-- ReservationRoom -->
+<update id="ReservationRoom" parameterType="with">
+update room set OPGENDER=#{opGender},MAXIMUM=#{maximum},DAYDAY=#{dayDay},TIMES=#{times} where ROOMID = #{roomId}
+</update>
 </mapper>

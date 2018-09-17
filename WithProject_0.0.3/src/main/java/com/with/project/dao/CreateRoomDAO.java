@@ -15,7 +15,7 @@ public class CreateRoomDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	//방만들기할때 RoomId max 값 가져오기
-	public int MaxId() {
+	public String MaxId() {
 		
 		return sqlSession.selectOne("With.RoomId");
 	}
@@ -30,4 +30,17 @@ public class CreateRoomDAO {
 		return sqlSession.selectOne("With.RoomList", insertRoomId);
 	}
 */
+	public int CreateRealRoom(RoomVO roomVO) {
+		
+		return sqlSession.update("With.CreateRealRoom", roomVO);
+	}
+	//방 아이디 값으로 방찾기
+	public RoomVO SelectRoom(RoomVO roomVO) {
+		
+		return sqlSession.selectOne("With.SelectRoom", roomVO);
+	}
+	public int ReservationRoom(RoomVO roomVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("With.ReservationRoom", roomVO);
+	}
 }

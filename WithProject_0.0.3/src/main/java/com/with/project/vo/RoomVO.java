@@ -7,7 +7,7 @@ public class RoomVO {
 	private String preTime;
 	private String preDistance;
 	private String preMoney;
-	private int opGender;
+	private String opGender;
 	private String rId1;
 	private String rId2;
 	private String rId3;
@@ -52,10 +52,10 @@ public class RoomVO {
 	public void setPreMoney(String preMoney) {
 		this.preMoney = preMoney;
 	}
-	public int getOpGender() {
+	public String getOpGender() {
 		return opGender;
 	}
-	public void setOpGender(int opGender) {
+	public void setOpGender(String opGender) {
 		this.opGender = opGender;
 	}
 	public String getrId1() {
