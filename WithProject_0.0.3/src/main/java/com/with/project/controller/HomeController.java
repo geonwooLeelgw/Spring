@@ -231,7 +231,7 @@ public class HomeController {
 		return mav;
 
 	}
-
+	//방 진짜로 만들기
 	@RequestMapping(value = "/CreateRealRoom", method = RequestMethod.POST)
 	public ModelAndView CreateRealRoom(@ModelAttribute RoomVO roomVO, HttpSession session,@RequestParam("gender") String gender,HttpServletResponse response) {
 		mav = new ModelAndView();
@@ -246,7 +246,7 @@ public class HomeController {
 		mav = crs.CreateRealRoom(roomVO);
 		return mav;
 	}
-	
+	//방 예약하기
 	@RequestMapping(value = "/ReservationRoom", method = RequestMethod.POST)
 	public ModelAndView ReservationRoom(@ModelAttribute RoomVO roomVO, @RequestParam("gender") String gender,@RequestParam("dayDay") String dayDay, @RequestParam("times") String times) {
 		mav = new ModelAndView();
@@ -262,5 +262,35 @@ public class HomeController {
 		return mav;
 		
 	}
-
+	//RoomList 방목록 불러오기
+	@RequestMapping(value = "/RoomList", method = RequestMethod.GET)
+	public ModelAndView RoomList() {
+		mav = new ModelAndView();
+		
+		mav = crs.RoomList();
+		
+		return mav;
+		
+	}
+	//RoomInfo 방 세부정보
+	@RequestMapping(value = "/RoomInfo", method = RequestMethod.GET)
+	public ModelAndView RoomInfo(@ModelAttribute RoomVO roomVO, HttpSession session,HttpServletResponse response) throws IOException {
+		mav = new ModelAndView();
+		
+		mav = crs.RoomInfo(roomVO, session,response);
+		
+		return mav;
+		
+	}
+	//RoomOut 방나가기
+	@RequestMapping(value = "/RoomOut", method = RequestMethod.GET)
+	public ModelAndView RoomOut(@ModelAttribute RoomVO roomVO,HttpSession session, HttpServletResponse response) throws IOException {
+		mav = new ModelAndView();
+		
+		mav = crs.RoomOut(roomVO, session,response);
+		
+		return mav;
+		
+	
+}
 }

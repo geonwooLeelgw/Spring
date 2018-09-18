@@ -15,7 +15,21 @@ public class RoomVO {
 	private String dayDay;
 	private String times;
 	private String maximum;
+	private String driverId;
+	private String finalMoney;
 	
+	public String getFinalMoney() {
+		return finalMoney;
+	}
+	public void setFinalMoney(String finalMoney) {
+		this.finalMoney = finalMoney;
+	}
+	public String getDriverId() {
+		return driverId;
+	}
+	public void setDriverId(String driverId) {
+		this.driverId = driverId;
+	}
 	public int getRoomId() {
 		return roomId;
 	}

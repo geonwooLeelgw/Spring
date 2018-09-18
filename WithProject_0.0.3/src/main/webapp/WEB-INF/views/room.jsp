@@ -17,16 +17,16 @@
 성별 옵션: ${Room.opGender }<br>
 <%int num = 0; %>
 <c:if test="${Room.rId1 != null}">
-<% num =+ 1; %>
+<% num += 1; %>
 </c:if>
 <c:if test="${Room.rId2 != null }">
-<% num =+1; %>
+<% num +=1; %>
 </c:if>
 <c:if test="${Room.rId3 != null }">
-<% num =+1; %>
+<% num +=1; %>
 </c:if>
 <c:if test="${Room.rId4 != null }">
-<% num =+1; %>
+<% num +=1; %>
 </c:if>
 인원 수: <%=num %> / ${Room.maximum}<br>
 <c:if test="${Room.rId1 != null}">
@@ -41,17 +41,27 @@
 <c:if test="${Room.rId4 != null}">
 현재 입장중인 ID: ${Room.rId4}<br>
 </c:if>
+<c:if test="${Room.driverId == null}">
+기사 ID : 현재 입장중인 기사가 없습니다.<br>
+</c:if>
+<c:if test="${Room.driverId != null}">
+기사 ID : <a href="DriverInfo?driverId=${Room.driverId}">${Room.driverId}</a><br>
+</c:if>
+
+
 <br>
 출발지 : ${Room.rStart}<br>
 도착지 : ${Room.rEnd }<br>
 예상거리 : ${Room.preDistance }<br>
 
-(예상금액 / 최대인원 한 값)예상금액 : ${Room.preMoney }원<br>
+(예상금액 / 최대인원 한 값)예상금액 : ${Room.finalMoney }원<br>
 예상시간 : ${Room.preTime }<br>
 <a href="ChattingRoom">채팅방 입장</a><br>
-결제 미완료 / 동승중<br>
-결제 / 결제취소<br>
-<a href="home">방 나가기</a>
+결제 미완료<br>
+동승중<br>
+<a href="pay?${Room.roomId }">결제</a><br>
+<a href="payCancel?${Room.roomId }">결제 취소</a><br>
+<a href="RoomOut?roomId=${Room.roomId }">방 나가기</a>
 
 <!--  
 <c:if test="${LoginMember.passuser == 2}">
