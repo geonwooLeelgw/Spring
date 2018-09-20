@@ -31,6 +31,7 @@
         <th>성별옵션</th>
         <th>최대인원</th>
         <th>기사</th>
+        
         <th>입장</th>
         
       </tr>
@@ -48,6 +49,7 @@
           	  <td>${room.opGender }</td>
           	  <td>${room.maximum }</td>
           	  <td>${room.driverId }</td>
+          	  
           	  
           	  <th><a href="RoomInfo?roomId=${room.roomId }">입장!</a></th>
       </tr>

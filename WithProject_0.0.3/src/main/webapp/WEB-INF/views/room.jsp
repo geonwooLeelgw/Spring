@@ -45,7 +45,7 @@
 기사 ID : 현재 입장중인 기사가 없습니다.<br>
 </c:if>
 <c:if test="${Room.driverId != null}">
-기사 ID : <a href="DriverInfo?driverId=${Room.driverId}">${Room.driverId}</a><br>
+기사 ID : <a href="DriverInfo?Id=${Room.driverId}">${Room.driverId}</a><br>
 </c:if>
 
 
@@ -59,9 +59,10 @@
 <a href="ChattingRoom">채팅방 입장</a><br>
 결제 미완료<br>
 동승중<br>
-<a href="pay?${Room.roomId }">결제</a><br>
+<a href="pay?finalMoney=${Room.finalMoney }&roomId=${Room.roomId}">결제</a><br>
 <a href="payCancel?${Room.roomId }">결제 취소</a><br>
-<a href="RoomOut?roomId=${Room.roomId }">방 나가기</a>
+<a href="RoomOut?roomId=${Room.roomId }">방 나가기</a><br>
+<a href="home">메인으로</a>
 
 <!--  
 <c:if test="${LoginMember.passuser == 2}">

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.with.project.service.CreateRoomService;
 import com.with.project.service.MemberService;
+import com.with.project.service.PayService;
 import com.with.project.vo.MemberVO;
 import com.with.project.vo.RoomVO;
 
@@ -29,6 +31,9 @@ public class HomeController {
 
 	@Autowired
 	private CreateRoomService crs;
+	
+	@Autowired
+	private PayService ps;
 
 	@Autowired
 	private HttpSession session;
@@ -290,7 +295,26 @@ public class HomeController {
 		mav = crs.RoomOut(roomVO, session,response);
 		
 		return mav;
+	}
+	//DriverInfo 방에서 기사의 상세정보 보기 
+	@RequestMapping(value = "/DriverInfo", method = RequestMethod.GET)
+	public ModelAndView DriverInfo(@RequestParam("Id") String Id, HttpServletResponse response) throws IOException {
+		mav = new ModelAndView();
 		
+		mav = crs.RoomDriverInfo(Id);
+		
+		return mav;
+	}
+	//pay 결제
+	@RequestMapping(value = "/pay", method = RequestMethod.GET)
+	public ModelAndView pay(@Param("finalMoney") String finalMoney,@RequestParam String roomId, HttpServletResponse response,HttpSession session) throws IOException {
+		mav = new ModelAndView();
+		
+		mav = ps.PayClick(finalMoney,roomId,response,session);
+		
+		return mav;
+	}
+	//AddPoint
 	
-}
+	
 }

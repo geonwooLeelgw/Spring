@@ -164,4 +164,41 @@ UPDATE ROOM SET RID3=null WHERE roomId = #{roomId}
 UPDATE ROOM SET RID4=null WHERE roomId = #{roomId}
 </update>
 
+<!-- MemberGender -->
+<select id="MemberGender" parameterType="with" resultType="with">
+select * from member where ID=#{Id}
+</select>
+
+<!-- RoomGender -->
+<select id="RoomGender" parameterType="room" resultType="room">
+SELECT * FROM ROOM WHERE ROOMID = #{roomId}
+</select>
+
+<!-- SelectDriverId -->
+<select id="SelectDriverId" parameterType="room" resultType="String">
+SELECT DRIVERID FROM ROOM WHERE ROOMID = #{roomId}
+</select>
+
+<!-- UpdateDriver -->
+<update id="UpdateDriver" parameterType="room">
+UPDATE ROOM SET driverId=#{driverId} WHERE roomId = #{roomId}
+</update>
+
+<!-- RoomOutDriver -->
+<update id="RoomOutDriver" parameterType="room">
+UPDATE ROOM SET driverId=null WHERE roomId = #{roomId}
+</update>
+
+<!--DriverInfo  -->
+<select id="DriverInfo" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE ID = #{Id}
+</select>
+
+<!-- UserPoint 유저 포인트찾기 PAY 클래스-->
+<select id="UserPoint" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE ID = #{Id}
+</select>
+
+
+
 </mapper>

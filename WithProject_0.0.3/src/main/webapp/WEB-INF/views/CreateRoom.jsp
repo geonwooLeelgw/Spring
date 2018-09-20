@@ -331,11 +331,16 @@ margin-bottom: 0;
  도착지 확인 :${Room.rEnd}<br>
 예상 거리 :${Room.preDistance}<br>
 예상 금액 :${Room.preMoney}<br>
-예상 시간 :${Room.preTime}<br> 
+예상 시간 :${Room.preTime}<br>
 <form action="CreateRealRoom?roomId=${Room.roomId}" method="post">
-동승자 성별선택 :<input type=radio name="gender" value="men">남자
-	  <input type="radio" name="gender" value="girl">여자
-	  <input type="radio" name="gender" value="noProblem" checked="checked">상관없음<br>
+동승자 성별선택 :
+<c:if test="${Gender.gender.equals('men')}">
+<input type=radio name="gender" value="men">남자
+</c:if>
+<c:if test="${Gender.gender.equals('women')}">
+<input type="radio" name="gender" value="women">여자
+</c:if>
+<input type="radio" name="gender" value="noProblem" checked="checked">상관없음<br>
 최대 인원 선택 : <select name="maximum">
 <option value="2">2명</option>
 <option value="3">3명</option>
@@ -376,7 +381,7 @@ margin-bottom: 0;
 <option value="23:00">23:00</option>
 </select><br>
 동승자 성별선택 :<input type=radio name="gender" value="men">남자
-	  <input type="radio" name="gender" value="girl">여자
+	  <input type="radio" name="gender" value="women">여자
 	  <input type="radio" name="gender" value="noProblem" checked="checked">상관없음<br>
 최대 인원 선택 : <select name="maximum">
 <option value="2">2명</option>

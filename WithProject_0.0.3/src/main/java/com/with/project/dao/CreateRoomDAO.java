@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import com.with.project.vo.MemberVO;
 import com.with.project.vo.RoomVO;
 
 @Repository
@@ -126,8 +126,37 @@ public class CreateRoomDAO {
 		sqlSession.update("With.RoomOutRid3", roomVO);
 		
 	}
+	//rId4 위치에 자신의 아이디가 있을때
 	public void RoomOutRid4(RoomVO roomVO) {
 		sqlSession.update("With.RoomOutRid4", roomVO);
 		
+	}
+	//세션에 있는 아이디 값으로 성별 가져오기
+	public MemberVO MemberGender(String Id) {
+		
+		return sqlSession.selectOne("With.MemberGender", Id);
+	}
+	//room의 성별 옵션 가져오기
+	public RoomVO roomS(RoomVO roomVO) {
+		
+		return sqlSession.selectOne("With.RoomGender", roomVO);
+	}
+	//방에서 기사아이디 가져오기
+	public String SelectDriverId(RoomVO roomVO) {
+		
+		return sqlSession.selectOne("With.SelectDriverId", roomVO);
+	}
+	//방에 기사가 없으면 기사입장~
+	public void UpdateDriverId(RoomVO roomVO) {
+		sqlSession.update("With.UpdateDriver", roomVO);
+		
+	}
+	//기사가 방을 나갈때
+	public void RoomOutDriver(RoomVO roomVO) {
+		sqlSession.update("With.RoomOutDriver", roomVO);
+	}
+	//기사정보를 보고싶을때
+	public MemberVO DriverInfo(String Id) {
+		return sqlSession.selectOne("With.DriverInfo", Id);
 	}
 }

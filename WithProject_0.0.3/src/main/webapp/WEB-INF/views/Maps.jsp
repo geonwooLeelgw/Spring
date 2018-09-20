@@ -336,7 +336,7 @@
 		
 		<a href="RoomList">방목록</a>
 		
-		
+		<a href="home">메인으로</a>
 		</div>
      	
      	
