@@ -86,7 +86,12 @@ update room set OPGENDER=#{opGender},MAXIMUM=#{maximum},DAYDAY=#{dayDay},TIMES=#
 
 <!--RoomList  -->
 <select id="RoomList" parameterType="room" resultType="room">
-SELECT * FROM ROOM ORDER BY ROOMID
+select * from room where DAYDAY is null ORDER BY ROOMID
+</select>
+
+<!--RoomList2  -->
+<select id="RoomList2" parameterType="room" resultType="room">
+select * from room where DAYDAY is not null ORDER BY ROOMID
 </select>
 
 <!-- Id1 -->
@@ -238,5 +243,20 @@ SELECT * FROM ROOM WHERE ROOMID = #{roomId}
 <select id="SelectOkChash" parameterType="pay" resultType="String">
 SELECT OKCASH FROM PAY WHERE ROOMID = #{roomId} and id = #{id}
 </select>
+
+<!-- PayList -->
+<select id="PayList" parameterType="pay" resultType="pay">
+select * from pay where roomId = #{roomId}
+</select>
+
+<!-- InsertDrvierPay -->
+<insert id="InsertDrvierPay" parameterType="pay">
+insert into pay values(#{roomId},#{id},2)
+</insert>
+
+<!-- EndRoomInsert -->
+<insert id="EndRoomInsert" parameterType="endRoom">
+insert into ENDROOM values(#{eroomId},#{erStart},#{erEnd},#{epreTime},#{epreDistance},#{epreMoney},#{eopGender},#{erId1},#{erId2},#{erId3},#{erId4},#{edayDay},#{etimes},#{emaximum},#{edriverId},#{efinalMoney})
+</insert>
 
 </mapper>

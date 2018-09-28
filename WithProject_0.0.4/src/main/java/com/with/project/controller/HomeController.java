@@ -21,6 +21,7 @@ import com.with.project.service.PayService;
 import com.with.project.vo.MemberVO;
 import com.with.project.vo.PayVO;
 import com.with.project.vo.RoomVO;
+import com.with.project.vo.endRoomVO;
 
 @Controller
 public class HomeController {
@@ -351,4 +352,96 @@ public class HomeController {
 		mav = ps.payCancel(session,payVO);
 		return mav;
 	}
+	
+	//예약 및 결제 Rpay
+	@RequestMapping(value = "/Rpay", method = RequestMethod.GET)
+	public ModelAndView Rpay(@RequestParam("finalMoney") String finalMoney,@RequestParam("roomId") String roomId, HttpServletResponse response,HttpSession session) throws IOException {
+		mav = new ModelAndView();
+		
+		mav = ps.PayClick2(finalMoney,roomId,response,session);
+		
+		return mav;
+	}
+	//PayPro2
+	@RequestMapping(value = "/PayPro2", method = RequestMethod.POST)
+	public ModelAndView PayPro2(@ModelAttribute MemberVO memberVO,HttpSession session,@RequestParam("finalMoney") String finalMoney,@ModelAttribute PayVO payVO,HttpServletResponse response) throws IOException  {
+		mav = new ModelAndView();
+		/*System.out.println(memberVO.getPoint());
+		System.out.println(payVO.getRoomId());
+		System.out.println(finalMoney);*/
+		mav = ps.PayPro2(session,payVO,finalMoney,response,memberVO);
+		
+		return mav;
+	}
+	
+	//AddPoint2
+	@RequestMapping(value = "/AddPoint2", method = RequestMethod.POST)
+	public ModelAndView AddPoint2(@RequestParam("finalMoney") String finalMoney,@RequestParam("roomId") String roomId){
+	
+		mav = new ModelAndView();
+		
+		mav = ps.AddPoint2(finalMoney,roomId);
+		
+		return mav;
+	}
+	
+	//payCancel2
+	@RequestMapping(value = "/payCancel2", method = RequestMethod.GET)
+	public ModelAndView payCancel2(HttpSession session, @ModelAttribute PayVO payVO) {
+		mav = new ModelAndView();
+		mav = ps.payCancel2(session,payVO);
+		return mav;
+	}
+	
+	//RoomOut2
+	@RequestMapping(value = "/RoomOut2", method = RequestMethod.GET)
+	public ModelAndView RoomOut2(@ModelAttribute RoomVO roomVO,HttpSession session, HttpServletResponse response) throws IOException {
+		mav = new ModelAndView();
+		
+		mav = crs.RoomOut2(roomVO, session,response);
+		
+		return mav;
+	}
+	
+	//예약룸 리스트 불러오기
+	@RequestMapping(value = "/RoomList2", method = RequestMethod.GET)
+	public ModelAndView RoomList2() {
+		mav = new ModelAndView();
+		
+		mav = crs.RoomList2();
+		
+		return mav;
+		
+	}
+	
+    //AddPointPro2
+	@RequestMapping(value = "/AddPointPro2", method = RequestMethod.POST)
+	public ModelAndView AddPointPro2(@RequestParam("Point") String Point,HttpSession session,@RequestParam("finalMoney") String finalMoney,@RequestParam("roomId") String roomId)  {
+		mav = new ModelAndView();
+		//System.out.println(Point);
+		mav = ps.AddPointPro2(Point,session,roomId,finalMoney);
+		
+		return mav;
+	}
+	
+	//예약방 세부정보 
+	@RequestMapping(value = "/RoomInfo2", method = RequestMethod.GET)
+	public ModelAndView RoomInfo2(@ModelAttribute RoomVO roomVO, HttpSession session,HttpServletResponse response,PayVO payVO) throws IOException {
+		mav = new ModelAndView();
+		mav = crs.RoomInfo2(roomVO, session,response,payVO);
+		
+		return mav;
+		
+	}
+	//EndDriver
+	@RequestMapping(value = "/EndDriver", method = RequestMethod.GET)
+	public ModelAndView EndDriver(@ModelAttribute RoomVO roomVO,HttpSession session, HttpServletResponse response, PayVO payVO, endRoomVO endRoom) throws IOException {
+		mav = new ModelAndView();
+		
+		mav = crs.EndDriver(roomVO, session,response,payVO,endRoom);
+		
+		return mav;
+	}
+	
+	
 }

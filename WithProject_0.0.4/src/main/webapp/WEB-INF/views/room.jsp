@@ -14,6 +14,7 @@
 </head>
 <body>
 <h2>room.jsp</h2>
+<h3>room페이지에서는 뒤로가기 금지!</h3>
 성별 옵션: ${Room.opGender }<br>
 <%int num = 0; %>
 <c:if test="${Room.rId1 != null}">
@@ -57,12 +58,14 @@
 (예상금액 / 최대인원 한 값)예상금액 : ${Room.finalMoney }원<br>
 예상시간 : ${Room.preTime }<br>
 <a href="ChattingRoom">채팅방 입장</a><br>
-결제 미완료<br>
-동승중<br>
+
 <c:if test="${pay.okCash == null}">
+결제 미완료<br>
 <a href="pay?finalMoney=${Room.finalMoney }&roomId=${Room.roomId}">결제</a><br>
+
 </c:if>
 <c:if test="${pay.okCash == '1'}">
+동승중<br>
 <a href="payCancel?roomId=${Room.roomId }">결제 취소</a><br>
 </c:if>
 
@@ -71,7 +74,10 @@
 </c:if>
 
 <a href="home">메인으로</a>
-
+<c:if test="${member.passuser == 2}">
+<br>
+<a href="EndDriver?roomId=${Room.roomId}">운행완료 ^^7</a>
+</c:if>
 <!--  
 <c:if test="${LoginMember.passuser == 2}">
 <a href="DriverStart">기사용 시작하기</a><br><br>

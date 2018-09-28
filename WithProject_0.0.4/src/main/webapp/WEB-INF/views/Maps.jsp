@@ -334,8 +334,8 @@
      	
  		<button onclick="CreateRoom()">방 만들기</button><br><br>	
 		
-		<a href="RoomList">방목록</a>
-		
+		<a href="RoomList">바로만들어진 방목록</a>
+		<a href="RoomList2">예약진행중인 방목록</a>
 		<a href="home">메인으로</a>
 		</div>
      	

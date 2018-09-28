@@ -49,6 +49,10 @@ public class PayDAO {
 		sqlSession.delete("With.DelLine", payVO);
 		
 	}
+	public void InsertDrvier(PayVO payVO) {
+		sqlSession.insert("With.InsertDrvierPay", payVO);
+		
+	}
 
 
 }

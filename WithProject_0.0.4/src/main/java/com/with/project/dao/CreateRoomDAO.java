@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.with.project.vo.MemberVO;
 import com.with.project.vo.PayVO;
 import com.with.project.vo.RoomVO;
+import com.with.project.vo.endRoomVO;
 
 @Repository
 public class CreateRoomDAO {
@@ -169,5 +170,18 @@ public class CreateRoomDAO {
 	public String SelectOkChash(PayVO payVO) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("With.SelectOkChash", payVO);
+	}
+	public List<RoomVO> RoomList2() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("With.RoomList2");
+	}
+	public List<PayVO> PayList(int roomId) {
+		
+		return sqlSession.selectList("With.PayList", roomId);
+	}
+	
+	public void EndRoomInsert(endRoomVO endRoom) {
+		sqlSession.insert("With.EndRoomInsert", endRoom);
+		
 	}
 }
