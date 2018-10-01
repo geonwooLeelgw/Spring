@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//En" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="With">
+
+<!-- 
+크거나 같다와 같은 부등호 기호를 이용할 때는 CDATA로 쿼리문을 감싸줘야함
+![CDATA[쿼리문]]> 부등호 쓰려면
+ -->
+
+<!-- 기사 회원가입 -->
+<insert id="DriverJoin" parameterType="with">
+insert into member
+(ID, NAME, PASSWORD, GENDER, EMAIL, TEL,ADDRESS,PASSUSER,SIGNTYPE)
+values(#{Id},#{Name},#{Password},#{Gender},#{Email},#{Tel},#{Address},2,'emptys')
+</insert>
+<!-- 유저회원가입 -->
+<insert id="UserJoin" parameterType="with">
+insert into member
+(ID,NAME,PASSWORD,GENDER,EMAIL,TEL,ADDRESS,PASSUSER,SIGNTYPE)
+VALUES(#{Id},#{Name},#{Password},#{Gender},#{Email},#{Tel},#{Address},1,'user')
+</insert>
+<!-- 로그인 -->
+<select id="Login" parameterType="with" resultType="with">
+select * from member where ID=#{Id} and password=#{Password}
+</select>
+<!--Main  -->
+<select id="Main" parameterType="with" resultType="with">
+select * from member where ID=#{Id}
+</select>
+<!-- 유저정보 변경 -->
+<update id="UserUpdate" parameterType="with">
+UPDATE member SET email=#{Email},TEL=#{Tel},Address=#{Address},NAME=#{Name} WHERE id=#{Id}
+</update>
+<!-- 운전자 정보 변경 -->
+<update id="DriverUpdate" parameterType="with">
+UPDATE member SET email=#{Email},TEL=#{Tel},address=#{Address},certificate=#{Certificate},NAME=#{Name}  WHERE id=#{Id}
+</update>
+
+<!-- 아이디 중복확인 -->
+<select id="idOverlap" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE id=#{id}
+</select>
+
+
+<!-- 이메일 전송 -->
+<select id="SelectFindId" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE NAME=#{Name} AND EMAIL=#{Email}
+</select>
+
+<select id="FindId" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE NAME=#{Name} AND EMAIL=#{Email}
+</select>
+
+<select id="SelectFindPs" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE ID=#{Id}
+</select>
+
+
+<select id="FindPsPro" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE ID=#{Id}
+</select>
+
+<update id="ChangePsPro" parameterType="with">
+UPDATE member SET PASSWORD =#{Password} WHERE id=#{Id}
+</update>
+
+<select id= "MemberList" parameterType="with" resultType="with">
+SELECT * FROM MEMBER
+</select>
+
+<select id= "MemberDetail" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE ID= #{Id}
+</select>
+
+<!--  멤버 회원탈퇴 시키기 -->
+
+<delete id="MemberDel" parameterType="with">
+DELETE FROM MEMBER WHERE ID= #{Id}
+</delete>
+
+<select id="DriverList" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE SIGNTYPE='request'
+</select>
+
+<select id="DriverDetail" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE ID = #{Id}
+</select>
+<update id="DriverAuthorityApproval" parameterType="with">
+UPDATE MEMBER SET SIGNTYPE = 'SUCCESS' WHERE ID = #{Id}
+</update>
+<select id="DriverCheck" parameterType="with" resultType="with">
+SELECT * FROM MEMBER WHERE id=#{id} AND SIGNTYPE = 'request'
+</select>
+<update id="LicenseUpload" parameterType="with">
+UPDATE member SET certificate=#{Certificate},SIGNTYPE='request' WHERE id=#{Id}
+</update>
+
+</mapper>
