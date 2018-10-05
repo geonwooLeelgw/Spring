@@ -971,4 +971,315 @@ public class CreateRoomService {
 		return mav;
 	}
 
+	
+	public ModelAndView RoomInfo3(RoomVO roomVO, HttpServletResponse response, PayVO payVO, MemberVO member)
+			throws IOException {
+		mav = new ModelAndView();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		String id = member.getId();
+		MemberVO memberVO = CreateRoomDAO.MemberGender(id);
+		RoomVO room = CreateRoomDAO.roomS(roomVO);
+		String max = CreateRoomDAO.selectMax(roomVO);
+		int UserPass = memberVO.getPassuser();
+
+		if (UserPass == 1) {
+			// 성별
+			String memberGender = memberVO.getGender();
+			String RoomOpGender = room.getOpGender();
+			if (memberGender.equals(RoomOpGender) || RoomOpGender.equals("noProblem")) {
+				if (max.equals("2")) {
+					System.out.println("1");
+					String rId1 = CreateRoomDAO.SelectId1(roomVO);
+					// 1,2,3,4 컬럼에 null인지 아닌지 확인
+					if (rId1 == null) {
+						roomVO.setrId1(id);
+						CreateRoomDAO.UpdateId1(roomVO);
+						RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+						mav.addObject("Room", roomVO2);
+						mav.setViewName("room");
+						payVO.setId(id);
+						payVO.setRoomId(roomVO.getRoomId());
+						String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+						if (OkChash != null) {
+							PayVO pay = payDAO.SelectPayTable(payVO);
+							mav.addObject("pay", pay);
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+						} else {
+
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+						}
+					} else {
+						String rId2 = CreateRoomDAO.SelectId2(roomVO);
+						if (rId1.equals(id)) {
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else if (rId2 == null) {
+							roomVO.setrId2(id);
+							CreateRoomDAO.UpdateId2(roomVO);
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else if (rId2.equals(id)) {
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else {
+							out.println("<script>");
+							out.println("alert('인원이 꽉 찼습니다. 다른 방을 이용해주세용.');");
+							out.println("history.go(-1);");
+							out.println("</script>");
+							out.close();
+							mav.setViewName("redirect:RoomList");
+						}
+					}
+				} else if (max.equals("3")) {
+					String rId1 = CreateRoomDAO.SelectId1(roomVO);
+					String rId2 = CreateRoomDAO.SelectId2(roomVO);
+					String rId3 = CreateRoomDAO.selectId3(roomVO);
+					if (rId1 == null) {
+						rId1 = "1";
+					}
+					if (rId2 == null) {
+						rId2 = "1";
+					}
+					if (rId3 == null) {
+						rId3 = "1";
+					}
+					if (rId1.equals(id) || rId2.equals(id) || rId3.equals(id)) {
+						RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+						payVO.setId(id);
+						payVO.setRoomId(roomVO.getRoomId());
+						String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+						if (OkChash != null) {
+							PayVO pay = payDAO.SelectPayTable(payVO);
+							mav.addObject("pay", pay);
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+						} else {
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+						}
+					} else {
+						if (rId2.equals("1")) {
+							roomVO.setrId2(id);
+							CreateRoomDAO.UpdateId2(roomVO);
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else if (rId3.equals("1")) {
+							roomVO.setrId3(id);
+							CreateRoomDAO.UpdateId3(roomVO);
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else {
+							System.out.println("왜 여기로오는지 생각하기!, 만약 여기로온다면");
+						}
+					}
+				} else if (max.equals("4")) {
+					String rId1 = CreateRoomDAO.SelectId1(roomVO);
+					String rId2 = CreateRoomDAO.SelectId2(roomVO);
+					String rId3 = CreateRoomDAO.selectId3(roomVO);
+					String rId4 = CreateRoomDAO.selectId4(roomVO);
+					if (rId1 == null) {
+						rId1 = "1";
+					}
+					if (rId2 == null) {
+						rId2 = "1";
+					}
+					if (rId3 == null) {
+						rId3 = "1";
+					}
+					if (rId4 == null) {
+						rId4 = "1";
+					}
+					if (rId1.equals(id) || rId2.equals(id) || rId3.equals(id) || rId4.equals(id)) {
+						RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+						payVO.setId(id);
+						payVO.setRoomId(roomVO.getRoomId());
+						String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+						if (OkChash != null) {
+							PayVO pay = payDAO.SelectPayTable(payVO);
+							mav.addObject("pay", pay);
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+						} else {
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+						}
+					} else {
+						if (rId2.equals("1")) {
+							roomVO.setrId2(id);
+							CreateRoomDAO.UpdateId2(roomVO);
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else if (rId3.equals("1")) {
+							roomVO.setrId3(id);
+							CreateRoomDAO.UpdateId3(roomVO);
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else if (rId4.equals("1")) {
+							roomVO.setrId4(id);
+							CreateRoomDAO.UpdateId4(roomVO);
+							RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+							mav.addObject("Room", roomVO2);
+							mav.addObject("member", memberVO);
+							mav.setViewName("room");
+							payVO.setId(id);
+							payVO.setRoomId(roomVO.getRoomId());
+							String OkChash = CreateRoomDAO.SelectOkChash(payVO);
+							if (OkChash != null) {
+								PayVO pay = payDAO.SelectPayTable(payVO);
+								mav.addObject("pay", pay);
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							} else {
+								mav.addObject("Room", roomVO2);
+								mav.addObject("member", memberVO);
+								mav.setViewName("room");
+							}
+						} else {
+							System.out.println("왜 여기로오는지 생각하기!, 만약 여기로온다면");
+						}
+					} // 4개중에 모두 같지않은것 끝
+				} // max 끝
+
+			} else {
+				out.println("<script>");
+				out.println("alert('성별 옵션을 잘 보고 입장해주세요.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				mav.setViewName("redirect:RoomList");
+			}
+
+		} else {
+			// 여기는 passUser가 2일때 기사일때 입장 여부!
+			String DriverId = CreateRoomDAO.SelectDriverId(roomVO);
+			if (DriverId == null) {
+				DriverId = "0";
+			}
+			if (DriverId.equals("0")) {
+				roomVO.setDriverId(id);
+				CreateRoomDAO.UpdateDriverId(roomVO);
+				RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+				mav.addObject("Room", roomVO2);
+				mav.addObject("member", memberVO);
+				mav.setViewName("room");
+			} else if (DriverId.equals(id)) {
+				RoomVO roomVO2 = CreateRoomDAO.RoomInfo(roomVO);
+				mav.addObject("Room", roomVO2);
+				mav.addObject("member", memberVO);
+				mav.setViewName("room");
+			} else {
+				out.println("<script>");
+				out.println("alert('이미 다른 기사님이 운행을 준비중 입니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				mav.setViewName("redirect:RoomList");
+			}
+
+		}
+		return mav;
+	}
+	
 }

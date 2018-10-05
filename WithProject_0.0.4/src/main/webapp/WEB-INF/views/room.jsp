@@ -8,11 +8,38 @@
     <%-- <%@ page import="bean.EditorBean"%> --%>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+
+
+<script>
+$(document).ready(function () {
+    updateData();
+});
+
+function updateData(){
+    $.ajax({
+      url: "realTime",
+      type:"post",
+      data : {"roomId" : roomId.value, "Id" : Id.value},
+      cache : false,
+      success: function(data){
+       $('#showtime').html(data);
+      }
+    });
+    setTimeout("updateData()", 10000); // 2초 단위로 갱신 처리
+}
+</script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<%
+	String id = (String)session.getAttribute("id");
+%>
+<body onload="updateData()">
+<div id="showtime">
+<input type="hidden" id="Id" name="Id" value="<%=id%>">
+<input type="hidden" id="roomId" name="roomId" value="${Room.roomId}">
 <h2>room.jsp</h2>
 <h3>room페이지에서는 뒤로가기 금지!</h3>
 성별 옵션: ${Room.opGender }<br>
@@ -84,6 +111,6 @@
 <a href="DriverMyPage">마이페이지 기사용</a><br><br>
 </c:if>
 -->
-
+</div>
 </body>
 </html>

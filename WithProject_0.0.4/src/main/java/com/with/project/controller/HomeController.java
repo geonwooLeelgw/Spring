@@ -443,5 +443,26 @@ public class HomeController {
 		return mav;
 	}
 	
+	//KaKaoPay카카오페이 테스트
+	@RequestMapping(value = "/KaKaoPay", method = RequestMethod.GET)
+	public String KaKaoPay() {
+		return "KaKaoPay";
+	}
+	//KaKaoPay카카오페이 테스트2
+	@RequestMapping(value = "/kakaoPay2", method = RequestMethod.GET)
+	public String KaKaoPay2() {
+		return "kakaoPay2";
+	}
 	
+	//realTime
+	@RequestMapping(value = "/realTime", method = RequestMethod.POST)
+	public ModelAndView realTime(@ModelAttribute RoomVO roomVO, @ModelAttribute MemberVO member ,HttpServletResponse response,PayVO payVO) throws IOException {
+		System.out.println("Come on!");
+		mav = new ModelAndView();
+		System.out.println("Id:"+member.getId());
+		mav = crs.RoomInfo3(roomVO,response,payVO,member);
+		
+		return mav;
+		
+	}
 }
